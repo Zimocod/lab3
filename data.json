@@ -7,14 +7,70 @@
       "name": "$SysReset",
       "size": null,
       "modifiedDate": "2026-06-11T11:28:00",
-      "isHidden": true
+      "isHidden": true,
+      "contents": [
+        {
+          "type": "file",
+          "name": "Logs.txt",
+          "size": 4096,
+          "modifiedDate": "2026-06-11T11:30:00",
+          "isHidden": false
+        }
+      ]
     },
     {
       "type": "folder",
       "name": "Windows",
       "size": null,
       "modifiedDate": "2026-09-02T13:33:00",
-      "isHidden": false
+      "isHidden": false,
+      "contents": [
+        {
+          "type": "file",
+          "name": "explorer.exe",
+          "size": 5324200,
+          "modifiedDate": "2026-09-02T13:33:00",
+          "isHidden": false
+        },
+        {
+          "type": "file",
+          "name": "win.ini",
+          "size": 1024,
+          "modifiedDate": "2026-08-01T10:00:00",
+          "isHidden": false
+        },
+        {
+          "type": "folder",
+          "name": "System32",
+          "size": null,
+          "modifiedDate": "2026-09-02T13:33:00",
+          "isHidden": false,
+          "contents": [
+            {
+              "type": "file",
+              "name": "cmd.exe",
+              "size": 384000,
+              "modifiedDate": "2026-09-02T13:33:00",
+              "isHidden": false
+            },
+            {
+              "type": "file",
+              "name": "kernel32.dll",
+              "size": 1256000,
+              "modifiedDate": "2026-09-02T13:33:00",
+              "isHidden": true
+            },
+            {
+              "type": "folder",
+              "name": "drivers",
+              "size": null,
+              "modifiedDate": "2026-09-02T13:33:00",
+              "isHidden": false,
+              "contents": []
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "file",
