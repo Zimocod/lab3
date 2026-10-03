@@ -67,6 +67,11 @@
               "modifiedDate": "2026-09-02T13:33:00",
               "isHidden": false,
               "contents": []
+            },
+            { "type": "file",
+              "name": "system32.dll",
+              "size": 5000,
+              "isHidden": false
             }
           ]
         }

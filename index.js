@@ -36,7 +36,7 @@ program
             items = items.slice(0, parseInt(options.limit, 10));
         }
 
-        console.log(`📁 Каталог: ${data.directoryName} (Всього елементів: ${data.totalElements})`);
+        console.log(`Каталог: ${data.directoryName} (Всього елементів: ${data.totalElements})`);
         items.forEach(item => {
             console.log(`- [${item.type.toUpperCase()}] ${item.name}`);
         });
@@ -51,7 +51,7 @@ program
         const item = data.contents.find(el => el.name.toLowerCase() === name.toLowerCase());
 
         if (!item) {
-            console.error(`❌ Помилка: Елемент з назвою "${name}" не знайдено.`);
+            console.error(`Помилка: Елемент з назвою "${name}" не знайдено.`);
             process.exit(1);
         }
         console.log(item);
@@ -66,11 +66,11 @@ program
         const item = data.contents.find(el => el.name === name);
 
         if (!item) {
-            console.error(`❌ Помилка: Елемент "${name}" не знайдено.`);
+            console.error(`Помилка: Елемент "${name}" не знайдено.`);
             process.exit(1);
         }
         if (!(fieldName in item)) {
-            console.error(`❌ Помилка: Поле "${fieldName}" відсутнє у елемента "${name}".`);
+            console.error(`Помилка: Поле "${fieldName}" відсутнє у елемента "${name}".`);
             process.exit(1);
         }
 
