@@ -115,7 +115,7 @@ program
 
         const folder = data.contents.find(el => el.name === folderName && el.type === 'folder');
         if (!folder) {
-            console.error(`❌ Помилка: Папку "${folderName}" не знайдено.`);
+            console.error(`Помилка: Папку "${folderName}" не знайдено.`);
             process.exit(1);
         }
 
@@ -135,7 +135,7 @@ program
         }
 
         const totalSize = calculateTotalSize(folder);
-        console.log(`📦 Загальний розмір папки "${folderName}": ${totalSize} байт.`);
+        console.log(`Загальний розмір папки "${folderName}": ${totalSize} байт.`);
     });
 
 // Пошук файлу/папки за назвою в усьому дереві (Рекурсія)
@@ -166,9 +166,11 @@ program
         searchTree(data.contents, data.directoryName);
 
         if (foundItems.length === 0) {
-            console.log(`🔍 Елементів, що містять "${searchName}", не знайдено.`);
+            console.log('Елементів, що містять "${searchName}", не знайдено.');
         } else {
-            console.log(`🔍 Знайдено результатів: ${foundItems.length}`);
+            console.log(`Знайдено результатів: ${foundItems.length}`);
             foundItems.forEach(res => console.log(`- [${res.type}] ${res.path}`));
         }
     });
+
+program.parse(process.argv);
