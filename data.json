@@ -1,0 +1,34 @@
+{
+  "directoryName": "C:\\",
+  "totalElements": 4,
+  "contents": [
+    {
+      "type": "folder",
+      "name": "$SysReset",
+      "size": null,
+      "modifiedDate": "2026-06-11T11:28:00",
+      "isHidden": true
+    },
+    {
+      "type": "folder",
+      "name": "Windows",
+      "size": null,
+      "modifiedDate": "2026-09-02T13:33:00",
+      "isHidden": false
+    },
+    {
+      "type": "file",
+      "name": ".GamingRoot",
+      "size": 1024,
+      "modifiedDate": "2026-06-14T23:29:00",
+      "isHidden": true
+    },
+    {
+      "type": "file",
+      "name": "DumpStack",
+      "size": 12288,
+      "modifiedDate": "2026-08-12T12:11:00",
+      "isHidden": false
+    }
+  ]
+}

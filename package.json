@@ -13,5 +13,6 @@
   "type": "module",
   "dependencies": {
     "commander": "^15.0.0"
-  }
+  },
+  "devDependencies": {}
 }
