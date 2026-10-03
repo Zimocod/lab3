@@ -106,3 +106,69 @@ program
             items.forEach(item => console.log(`- ${item.name} (${item.type})`));
         }
     });
+// Сумарний розмір папки (Рекурсія)
+program
+    .command('size <folderName>')
+    .description('Показати сумарний розмір папки з урахуванням вкладених файлів')
+    .action((folderName) => {
+        const data = loadData(program.opts().file);
+
+        const folder = data.contents.find(el => el.name === folderName && el.type === 'folder');
+        if (!folder) {
+            console.error(`❌ Помилка: Папку "${folderName}" не знайдено.`);
+            process.exit(1);
+        }
+
+        // Рекурсивна функція для підрахунку
+        function calculateTotalSize(folderObj) {
+            let total = 0;
+            const items = folderObj.contents || [];
+
+            for (const item of items) {
+                if (item.type === 'file') {
+                    total += item.size || 0; // Додаємо розмір файлу
+                } else if (item.type === 'folder') {
+                    total += calculateTotalSize(item); // Папка викликає цю ж функцію для себе
+                }
+            }
+            return total;
+        }
+
+        const totalSize = calculateTotalSize(folder);
+        console.log(`📦 Загальний розмір папки "${folderName}": ${totalSize} байт.`);
+    });
+
+// Пошук файлу/папки за назвою в усьому дереві (Рекурсія)
+program
+    .command('search <searchName>')
+    .description('Знайти файл чи папку за назвою в усьому каталозі')
+    .action((searchName) => {
+        const data = loadData(program.opts().file);
+        let foundItems = [];
+
+        // Рекурсивна функція пошуку
+        function searchTree(items, currentPath) {
+            for (const item of items) {
+                const fullPath = `${currentPath}${item.name}`;
+
+                // Порівнюємо назви, ігноруючи регістр букв
+                if (item.name.toLowerCase().includes(searchName.toLowerCase())) {
+                    foundItems.push({ path: fullPath, type: item.type });
+                }
+
+                // Якщо це папка і в ній є щось, шукаємо і там
+                if (item.type === 'folder' && item.contents) {
+                    searchTree(item.contents, `${fullPath}\\`);
+                }
+            }
+        }
+
+        searchTree(data.contents, data.directoryName);
+
+        if (foundItems.length === 0) {
+            console.log(`🔍 Елементів, що містять "${searchName}", не знайдено.`);
+        } else {
+            console.log(`🔍 Знайдено результатів: ${foundItems.length}`);
+            foundItems.forEach(res => console.log(`- [${res.type}] ${res.path}`));
+        }
+    });
