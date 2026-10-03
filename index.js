@@ -77,4 +77,32 @@ program
         console.log(`${fieldName}: ${item[fieldName]}`);
     });
 
+// Вміст вкладеної папки (з прапорцем для прихованих)
+program
+    .command('folder-content <folderName>')
+    .description('Показати вміст вкладеної папки')
+    .option('-s, --show-hidden', 'показати також приховані елементи')
+    .action((folderName, options) => {
+        const data = loadData(program.opts().file);
 
+        const folder = data.contents.find(el => el.name === folderName && el.type === 'folder');
+        if (!folder) {
+            console.error(`Помилка: Папку "${folderName}" не знайдено.`);
+            process.exit(1);
+        }
+
+        // Якщо в папці немає масиву contents, використовуємо порожній масив []
+        let items = folder.contents || [];
+
+        // Якщо прапорець не передано, відфільтровуємо ті, де isHidden === true
+        if (!options.showHidden) {
+            items = items.filter(item => item.isHidden !== true);
+        }
+
+        console.log(`Вміст папки "${folderName}":`);
+        if (items.length === 0) {
+            console.log(' (Папка порожня або приховані елементи відфільтровано)');
+        } else {
+            items.forEach(item => console.log(`- ${item.name} (${item.type})`));
+        }
+    });
