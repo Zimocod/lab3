@@ -23,4 +23,58 @@ function loadData(filePath) {
         process.exit(1);
     }
 }
+// Перелік елементів
+program
+    .command('list')
+    .description('Показати стислий перелік елементів у каталозі')
+    .option('-l, --limit <number>', 'обмежити кількість виведених елементів')
+    .action((options) => {
+        const data = loadData(program.opts().file);
+        let items = data.contents || [];
+
+        if (options.limit) {
+            items = items.slice(0, parseInt(options.limit, 10));
+        }
+
+        console.log(`📁 Каталог: ${data.directoryName} (Всього елементів: ${data.totalElements})`);
+        items.forEach(item => {
+            console.log(`- [${item.type.toUpperCase()}] ${item.name}`);
+        });
+    });
+
+// Один елемент повністю
+program
+    .command('info <name>')
+    .description('Показати всі дані про конкретний файл чи папку')
+    .action((name) => {
+        const data = loadData(program.opts().file);
+        const item = data.contents.find(el => el.name.toLowerCase() === name.toLowerCase());
+
+        if (!item) {
+            console.error(`❌ Помилка: Елемент з назвою "${name}" не знайдено.`);
+            process.exit(1);
+        }
+        console.log(item);
+    });
+
+// Значення окремого поля
+program
+    .command('field <name> <fieldName>')
+    .description('Показати значення конкретного поля елемента (наприклад, size або isHidden)')
+    .action((name, fieldName) => {
+        const data = loadData(program.opts().file);
+        const item = data.contents.find(el => el.name === name);
+
+        if (!item) {
+            console.error(`❌ Помилка: Елемент "${name}" не знайдено.`);
+            process.exit(1);
+        }
+        if (!(fieldName in item)) {
+            console.error(`❌ Помилка: Поле "${fieldName}" відсутнє у елемента "${name}".`);
+            process.exit(1);
+        }
+
+        console.log(`${fieldName}: ${item[fieldName]}`);
+    });
+
 
