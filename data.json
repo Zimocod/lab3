@@ -4,7 +4,7 @@
   "contents": [
     {
       "type": "folder",
-      "name": "$SysReset",
+      "name": "SysReset",
       "size": null,
       "modifiedDate": "2026-06-11T11:28:00",
       "isHidden": true,
